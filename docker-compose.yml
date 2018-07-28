@@ -10,5 +10,4 @@ services:
       - .:/var/service
       - ~/node_modules:/var/node_modules:cached
     environment:
-      ENV: "test"
       NODE_ENV: "test"

@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+git fetch
+
+if [[ $TRAVIS_BRANCH == "develop" ]]; then
+    export GIT_TAG="develop";
+else
+    git fetch --tags
+    export GIT_TAG="$(git describe --always --tags $(git rev-list --tags --max-count=1))" && export GIT_TAG="${GIT_TAG%.*}.$((${GIT_TAG##*.}+1))"
+fi
+
+
+if [[ $TRAVIS_PULL_REQUEST == "false" ]]; then
+    if [[ $TRAVIS_BRANCH = "master" ]]; then
+        git tag $GIT_TAG -a -m "Generated tag from Travis CI for build $TRAVIS_BUILD_NUMBER";
+        git push https://${GITHUB_TOKEN}@github.com/${TRAVIS_REPO_SLUG} --tags
+    fi
+fi

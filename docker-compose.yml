@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  solax-power:
+    image: bauro/solax-power
+    container_name: solax-power
+    build:
+      context: docker
+    volumes:
+      - .:/var/service
+      - ~/node_modules:/var/node_modules:cached
+    environment:
+      ENV: "test"
+      NODE_ENV: "test"

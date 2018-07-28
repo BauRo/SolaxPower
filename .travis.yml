@@ -1,0 +1,17 @@
+group: edge
+
+services:
+  - docker
+
+before_script:
+  - bin/npm install
+
+script:
+  - bin/test
+
+after_success:
+  - bin/release
+
+branches:
+  only:
+    - master

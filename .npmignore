@@ -1,0 +1,5 @@
+bin/
+docker/
+docker-compose.yml
+package-lock.json
+.travis.yml
